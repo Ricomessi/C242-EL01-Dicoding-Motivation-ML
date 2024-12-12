@@ -1,0 +1,16 @@
+FROM python:3.10-slim
+
+WORKDIR /skillradar
+
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
+
+EXPOSE 8080
+
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=8080
+
+CMD ["python", "app.py"]
